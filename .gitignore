@@ -1,0 +1,5 @@
+.*
+*.jar
+bin
+build
+test-output
