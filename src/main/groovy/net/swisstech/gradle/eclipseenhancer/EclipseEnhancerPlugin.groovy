@@ -30,9 +30,9 @@ class EclipseEnhancerPlugin implements Plugin<Project> {
 					if (hasJava || hasGroovy) { sourceSets*.resources.srcDirs*.each { it.mkdirs() } }
 				}
 
-				// make sure all output directories are gone
+				// make sure the eclipse output directory is gone
 				project.tasks.maybeCreate('mrproper').doLast {
-					project.delete("${projectDir}/bin")
+					project.delete(project.eclipse.classpath.defaultOutputDir)
 				}
 			}
 		}
