@@ -1,4 +1,4 @@
-package net.swisstech.gradle.eclipseehancer
+package net.swisstech.gradle.eclipseenhancer
 
 import org.slf4j.*
 
