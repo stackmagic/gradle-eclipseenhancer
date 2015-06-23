@@ -1,7 +1,11 @@
 
-apply plugin: 'java'
-apply plugin: 'groovy'
-apply plugin: 'eclipse'
+plugins {
+	id 'java'
+	id 'groovy'
+	id 'eclipse'
+	id 'com.jfrog.bintray'             version '1.2'
+	id 'net.swisstech.eclipseenhancer' version '1.0.0'
+}
 
 description = 'Gradle plugin that creates source folders expected by eclipse (but are missing on an initial git clone or were deleted for some reason)'
 group       = 'net.swisstech'
@@ -27,17 +31,9 @@ dependencies {
 // TODO use testng for groovy tests?
 // test.useTestNG()
 
-// TODO use eclipse-enhancer once it is published
-eclipseProject.doLast {
-	sourceSets*.java.srcDirs*.each      { it.mkdirs() }
-	sourceSets*.groovy.srcDirs*.each    { it.mkdirs() ; sourceSets.main.java.srcDirs += it }
-	sourceSets*.resources.srcDirs*.each { it.mkdirs() }
-}
-// END TODO
-
 // task to generate wrapper
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.1'
+	gradleVersion = '2.4'
 }
 
 // source-code jar
@@ -55,16 +51,6 @@ publishing {
 				classifier 'sources'
 			}
 		}
-	}
-}
-
-// uploading to jcenter
-buildscript {
-	repositories {
-		jcenter()
-	}
-	dependencies {
-		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6'
 	}
 }
 
